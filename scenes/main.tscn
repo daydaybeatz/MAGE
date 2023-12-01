@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://ceotix1oe2tmn"]
+
+[ext_resource type="PackedScene" uid="uid://bnrg2y6yyfgwu" path="res://scenes/player.tscn" id="2_ai8jb"]
+[ext_resource type="PackedScene" uid="uid://c2ck80vy4f46t" path="res://scenes/stone.tscn" id="3_t7nwq"]
+[ext_resource type="PackedScene" uid="uid://c6jyho1f7gnqx" path="res://scenes/terrain.tscn" id="4_rt1hw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_comr0"]
+sky_energy_multiplier = 0.83
+
+[sub_resource type="Sky" id="Sky_tbxfs"]
+sky_material = SubResource("ProceduralSkyMaterial_comr0")
+
+[sub_resource type="Environment" id="Environment_c54g4"]
+background_mode = 2
+sky = SubResource("Sky_tbxfs")
+ambient_light_source = 3
+ambient_light_energy = 6.86
+
+[node name="world" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 31.9243, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_c54g4")
+
+[node name="terrain" parent="." instance=ExtResource("4_rt1hw")]
+
+[node name="level_1" type="Node3D" parent="terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.83624, 0)
+
+[node name="stone" parent="terrain/level_1" instance=ExtResource("3_t7nwq")]
+transform = Transform3D(1.248, 0, 0, 0, 1.248, 0, 0, 0, 1.248, 12.917, 162.066, -3.3166)
+
+[node name="stone2" parent="terrain/level_1" instance=ExtResource("3_t7nwq")]
+transform = Transform3D(1.248, 0, 0, 0, 1.248, 0, 0, 0, 1.248, 15.0394, 162.066, -23.0088)
+
+[node name="stone3" parent="terrain/level_1" instance=ExtResource("3_t7nwq")]
+transform = Transform3D(1.248, 0, 0, 0, 1.248, 0, 0, 0, 1.248, -7.54845, 162.066, -4.10352)
+
+[node name="player" parent="." instance=ExtResource("2_ai8jb")]
+transform = Transform3D(-0.331898, 0, -0.943315, 0, 1, 0, 0.943315, 0, -0.331898, -11.1692, 162.817, -5.74338)
+floor_block_on_wall = false

@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dbllwx1nrdtl8"]
+
+[ext_resource type="Texture2D" uid="uid://bedundxgpiqrc" path="res://textures/texture_stone.jpg" id="1_33t78"]
+
+[resource]
+albedo_texture = ExtResource("1_33t78")
+uv1_scale = Vector3(-0.04, -0.04, -0.04)
+uv1_triplanar = true

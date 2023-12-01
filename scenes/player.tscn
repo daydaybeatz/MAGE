@@ -1,0 +1,211 @@
+[gd_scene load_steps=9 format=3 uid="uid://bnrg2y6yyfgwu"]
+
+[ext_resource type="Script" path="res://scripts/CanvasLayer.gd" id="1_0kysu"]
+[ext_resource type="Texture2D" uid="uid://b7i8r4db3cksl" path="res://textures/crosshair_3.png" id="2_5451w"]
+[ext_resource type="Script" path="res://scripts/selector.gd" id="3_fusd2"]
+
+[sub_resource type="GDScript" id="GDScript_nrwjd"]
+script/source = "extends CharacterBody3D
+
+@onready var head = $head
+@onready var camera_3d = $head/Camera3D
+
+var current_speed = 5
+const walking_speed = 5
+const sprinting_speed = 11
+const crouching_speed = 3.6
+
+const jump_velocity = 7
+const big_jump_velocity = 16
+
+const mouse_sens = 0.2
+
+var lerp_speed = 6
+
+var direction = Vector3.ZERO
+
+var crouching_depth = 0.3
+
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = ProjectSettings.get_setting(\"physics/3d/default_gravity\")
+
+func _ready():
+	camera_3d.transform()
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) #constraints mouse
+	
+
+func _input(event):
+	
+	#view
+	#try using the y, or x instead of the offset
+	
+	if Input.is_action_pressed(\"view\") and camera_3d.v_offset==0:
+		camera_3d.v_offset=-8
+	if Input.is_action_pressed(\"view\") and camera_3d.v_offset==-8:
+		camera_3d.v_offset=0
+
+	
+	if event is InputEventMouseMotion:
+		rotate_y(deg_to_rad(-event.relative.x * mouse_sens))
+		head.rotate_x(deg_to_rad(-event.relative.y * mouse_sens))
+		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-89), deg_to_rad(89))
+	
+func _physics_process(delta):
+	if Input.is_action_pressed(\"crouch\") and is_on_floor():
+		current_speed = crouching_speed
+		head.position.y = lerp(head.position.y,1.0 - crouching_depth,delta*lerp_speed)
+	else:
+		head.position.y = lerp(head.position.y,1.0,delta*lerp_speed)
+		if Input.is_action_pressed(\"sprint\") and is_on_floor():
+			current_speed=sprinting_speed
+		#if Input.is_action_just_released(\"sprint\") and not is_on_floor():
+			#current_speed=sprinting_speed
+			
+	if Input.is_action_just_released(\"sprint\"):
+		if is_on_floor():
+			current_speed=walking_speed
+		else:
+			current_speed=sprinting_speed
+			
+	if is_on_floor() and not Input.is_action_pressed(\"sprint\"):
+		current_speed=walking_speed
+	# Add the gravity.
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+
+	# Handle Jump.
+	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
+		
+		if Input.is_action_pressed(\"crouch\"):
+			velocity.y = big_jump_velocity
+		else:
+			velocity.y = jump_velocity
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var input_dir = Input.get_vector(\"left\", \"right\", \"up\", \"down\")
+	direction = lerp(direction,(transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(),delta*lerp_speed)
+	if direction:
+		velocity.x = direction.x * current_speed
+		velocity.z = direction.z * current_speed
+	else:
+		velocity.x = move_toward(velocity.x, 0, current_speed)
+		velocity.z = move_toward(velocity.z, 0, current_speed)
+	#print(current_speed)
+	move_and_slide()
+"
+
+[sub_resource type="GDScript" id="GDScript_ojkxx"]
+script/source = "extends Node3D
+
+#respawns player when \"r\" is pressed, could add death respawns here
+
+@onready var player = $\"..\"
+
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+	if Input.is_action_pressed(\"respawn\"):
+		
+		player.position.x = -5
+		player.position.y = 1
+		player.position.z = -12
+	
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_hvgyn"]
+font_size = 28
+font_color = Color(0.270588, 0.6, 0.486275, 1)
+shadow_size = 10
+shadow_color = Color(0.235294, 0.329412, 0.509804, 0.717647)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wtiho"]
+font_size = 22
+outline_size = 2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0aek6"]
+
+[node name="player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.723239, 0)
+script = SubResource("GDScript_nrwjd")
+
+[node name="spawner" type="Node3D" parent="."]
+script = SubResource("GDScript_ojkxx")
+
+[node name="player_gui" type="CanvasLayer" parent="."]
+script = ExtResource("1_0kysu")
+
+[node name="stone" type="Label" parent="player_gui"]
+anchors_preset = -1
+anchor_left = 0.014
+anchor_top = 0.02
+anchor_right = 0.093
+anchor_bottom = 0.085
+offset_left = -0.128
+offset_top = 0.039999
+offset_right = -38.136
+offset_bottom = -16.08
+text = "STONE"
+label_settings = SubResource("LabelSettings_hvgyn")
+
+[node name="interact" type="Label" parent="player_gui"]
+anchors_preset = -1
+anchor_left = 0.447
+anchor_top = 0.509
+anchor_right = 0.529
+anchor_bottom = 0.594
+offset_left = 0.0559692
+offset_top = 0.167999
+offset_right = -0.408081
+offset_bottom = 0.0879822
+text = "interact"
+label_settings = SubResource("LabelSettings_wtiho")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="debug" type="Label" parent="player_gui"]
+anchors_preset = -1
+anchor_left = 0.55
+anchor_top = 0.938
+anchor_right = 0.577
+anchor_bottom = 0.978
+offset_left = 2.39996
+offset_top = 4.17596
+offset_right = 2.29596
+offset_bottom = 4.25598
+text = "000"
+
+[node name="Crosshair1" type="Sprite2D" parent="player_gui"]
+position = Vector2(560, 308)
+scale = Vector2(0.524, -0.562)
+texture = ExtResource("2_5451w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.259516, -0.0446647)
+shape = SubResource("CapsuleShape3D_0aek6")
+
+[node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0900953, -0.0445459)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.544588, 0)
+light_energy = 2.872
+light_size = 0.085
+omni_range = 49.906
+omni_attenuation = 1.07177
+
+[node name="Camera3D" type="Camera3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0708838, 0.00606754)
+current = true
+
+[node name="selector" type="RayCast3D" parent="head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -0.0109953, -0.99994, 0, 0.99994, -0.0109953, 0, -0.2096, -0.0111649)
+target_position = Vector3(0, -1.435, 0)
+collide_with_areas = true
+collide_with_bodies = false
+debug_shape_thickness = 3
+script = ExtResource("3_fusd2")

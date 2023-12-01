@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://wmoy88owmmwi"]
+
+[ext_resource type="Texture2D" uid="uid://ct8nxi7l3q8ku" path="res://textures/texture_cobble.jpg" id="1_bfp4x"]
+
+[resource]
+albedo_texture = ExtResource("1_bfp4x")
+uv1_scale = Vector3(0.13, 0.13, 0.13)
+uv1_triplanar = true
