@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bnrg2y6yyfgwu"]
+[gd_scene load_steps=11 format=3 uid="uid://bnrg2y6yyfgwu"]
 
 [ext_resource type="Script" path="res://scripts/CanvasLayer.gd" id="1_0kysu"]
 [ext_resource type="Texture2D" uid="uid://b7i8r4db3cksl" path="res://textures/crosshair_3.png" id="2_5451w"]
+[ext_resource type="Texture2D" uid="uid://dwwfk2py081p4" path="res://textures/fps_sniper.png" id="2_ehm3o"]
 [ext_resource type="Script" path="res://scripts/selector.gd" id="3_fusd2"]
 
 [sub_resource type="GDScript" id="GDScript_nrwjd"]
@@ -30,7 +31,7 @@ var crouching_depth = 0.3
 var gravity = ProjectSettings.get_setting(\"physics/3d/default_gravity\")
 
 func _ready():
-	camera_3d.transform()
+	#camera_3d.transform()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) #constraints mouse
 	
 
@@ -72,6 +73,8 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+		if Input.is_action_just_released(\"ui_accept\"):  #air dash
+			current_speed=sprinting_speed*1.7
 
 	# Handle Jump.
 	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
@@ -129,6 +132,8 @@ outline_size = 2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0aek6"]
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mujcg"]
+
 [node name="player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.723239, 0)
 script = SubResource("GDScript_nrwjd")
@@ -145,10 +150,10 @@ anchor_left = 0.014
 anchor_top = 0.02
 anchor_right = 0.093
 anchor_bottom = 0.085
-offset_left = -0.128
-offset_top = 0.039999
-offset_right = -38.136
-offset_bottom = -16.08
+offset_left = 2.872
+offset_top = 1.04
+offset_right = 2.864
+offset_bottom = 0.919998
 text = "STONE"
 label_settings = SubResource("LabelSettings_hvgyn")
 
@@ -179,28 +184,35 @@ offset_right = 2.29596
 offset_bottom = 4.25598
 text = "000"
 
+[node name="Sprite2D" type="Sprite2D" parent="player_gui"]
+visible = false
+position = Vector2(864.5, 584.75)
+scale = Vector2(2.297, -1.957)
+texture = ExtResource("2_ehm3o")
+flip_v = true
+
 [node name="Crosshair1" type="Sprite2D" parent="player_gui"]
-position = Vector2(560, 308)
-scale = Vector2(0.524, -0.562)
+position = Vector2(971, 489)
+scale = Vector2(2.1875, -1.8125)
 texture = ExtResource("2_5451w")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.259516, -0.0446647)
+transform = Transform3D(0.71, 0, 0, 0, 0.71, 0, 0, 0, 0.71, 0, -0.207108, 0.0963077)
 shape = SubResource("CapsuleShape3D_0aek6")
 
-[node name="head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0900953, -0.0445459)
+[node name="mesh" type="MeshInstance3D" parent="CollisionShape3D"]
+transform = Transform3D(0.955, 0, 0, 0, 0.955, 0, 0, 0, 0.955, -0.0206473, 0.0766939, -0.0257865)
+gi_mode = 2
+mesh = SubResource("CapsuleMesh_mujcg")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.544588, 0)
-light_energy = 2.872
-light_size = 0.085
-omni_range = 49.906
-omni_attenuation = 1.07177
+[node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0277712, -0.37389)
 
 [node name="Camera3D" type="Camera3D" parent="head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0708838, 0.00606754)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0383412, -0.0427862)
 current = true
+fov = 80.7
+near = 0.019
 
 [node name="selector" type="RayCast3D" parent="head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, -0.0109953, -0.99994, 0, 0.99994, -0.0109953, 0, -0.2096, -0.0111649)
@@ -209,3 +221,9 @@ collide_with_areas = true
 collide_with_bodies = false
 debug_shape_thickness = 3
 script = ExtResource("3_fusd2")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="head"]
+light_energy = 7.541
+spot_range = 6.22047
+spot_attenuation = 2.07053
+spot_angle = 43.4227

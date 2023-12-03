@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 
 PlayerVariables="*res://scripts/player_variables.gd"
 
+[display]
+
+window/size/mode=3
+
 [input]
 
 up={
