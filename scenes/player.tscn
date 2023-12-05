@@ -126,7 +126,7 @@ func _input(event):
 			spring_arm_3d.transform.origin.z+=.5
 			spring_arm_3d.transform.origin.y+=.1
 			#selector.target_position.y+=.10
-			print()
+			
 	#if Input.is_action_just_released(\"view\") and cam==2:
 		#spring_arm_3d.transform.origin.z-=4
 		#spring_arm_3d.transform.origin.y+=1

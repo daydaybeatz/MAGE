@@ -2,7 +2,7 @@ extends RayCast3D
 
 
 #@onready var stone_label = $"../../../player_gui/stone"
-@onready var stone = $"../../player_gui/AspectRatioContainer2/stone"
+@onready var stone_label = $"../../player_gui/AspectRatioContainer2/stone"
 
 @onready var l_arm = $"../l_arm"
 @onready var r_arm = $"../r_arm"
