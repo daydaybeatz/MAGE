@@ -15,19 +15,13 @@ script/source = "extends CharacterBody3D
 
 @onready var spring_arm_3d = $head/SpringArm3D
 
-#@onready var l_arm_mesh = $head/l_arm/l_arm_mesh
-#@onready var l_arm = $head/l_arm
 @onready var l_arm_mesh = $head/l_arm/l_arm_mesh
 
-#@onready var r_arm_mesh = $head/r_arm/r_arm_mesh
-#@onready var r_arm = $head/r_arm
 @onready var r_arm_mesh = $head/r_arm/r_arm_mesh
 
 @onready var selector = $head/selector
 
 @onready var camera_3d = $head/SpringArm3D/Camera3D
-#@onready var camera_3d = $head/Camera3D
-
 
 
 var cam=1
