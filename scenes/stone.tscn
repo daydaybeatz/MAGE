@@ -52,4 +52,8 @@ transform = Transform3D(1.248, 0, 0, 0, 1.248, 0, 0, 0, 1.248, 0.157912, 0.15870
 shape = SubResource("CylinderShape3D_yt08a")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(0.801282, 0, 0, 0, 0.801282, 0, 0, 0, 0.801282, 0, 2.89047, 0)
+transform = Transform3D(0.801282, 0, 0, 0, 0.801282, 0, 0, 0, 0.801282, 0, 1.22622, 0)
+layers = 16
+light_energy = 0.427
+light_indirect_energy = 7.323
+light_volumetric_fog_energy = 0.0

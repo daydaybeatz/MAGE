@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bxpejmo36j5d6"]
+
+[ext_resource type="Texture2D" uid="uid://c2k0hh6xesjg0" path="res://textures/texture_dirt.png" id="1_pjbjj"]
+
+[resource]
+transparency = 1
+albedo_color = Color(0.690196, 0.607843, 0.560784, 0.466667)
+albedo_texture = ExtResource("1_pjbjj")

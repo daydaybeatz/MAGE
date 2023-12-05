@@ -2,27 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ct8nxi7l3q8ku"
-path.s3tc="res://.godot/imported/texture_cobble.jpg-304d54e04804909ec94aada8b6c443bb.s3tc.ctex"
+uid="uid://8y3h2hv8cr5e"
+path="res://.godot/imported/crosshair_5.png-c8245253cd0cf37bdae8e581a9f29a66.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/texture_cobble.jpg"
-dest_files=["res://.godot/imported/texture_cobble.jpg-304d54e04804909ec94aada8b6c443bb.s3tc.ctex"]
+source_file="res://textures/crosshair_5.png"
+dest_files=["res://.godot/imported/crosshair_5.png-c8245253cd0cf37bdae8e581a9f29a66.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=2
+compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -32,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1
