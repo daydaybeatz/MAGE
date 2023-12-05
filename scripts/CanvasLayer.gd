@@ -7,7 +7,6 @@ extends CanvasLayer
 @onready var stone = $AspectRatioContainer2/stone
 @onready var stamina = $AspectRatioContainer2/stamina
 
-@onready var my_font = load("res://textures/Greatplanet1-Regular.ttf")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
