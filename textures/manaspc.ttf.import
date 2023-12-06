@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://di5o4ctvljph1"
-path="res://.godot/imported/Inkverse-BWDRx.ttf-ce73d00463c4ea6403ab90f3d1977b3a.fontdata"
+uid="uid://dg8dsbl0rm8v2"
+path="res://.godot/imported/manaspc.ttf-b04de8c49f8411a1b80286e5f41c3bde.fontdata"
 
 [deps]
 
-source_file="res://textures/Inkverse-BWDRx.ttf"
-dest_files=["res://.godot/imported/Inkverse-BWDRx.ttf-ce73d00463c4ea6403ab90f3d1977b3a.fontdata"]
+source_file="res://textures/manaspc.ttf"
+dest_files=["res://.godot/imported/manaspc.ttf-b04de8c49f8411a1b80286e5f41c3bde.fontdata"]
 
 [params]
 

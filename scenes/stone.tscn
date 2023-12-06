@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2ck80vy4f46t"]
+[gd_scene load_steps=7 format=3 uid="uid://c2ck80vy4f46t"]
 
 [ext_resource type="Texture2D" uid="uid://bedundxgpiqrc" path="res://textures/texture_stone.jpg" id="1_5rkpx"]
 [ext_resource type="Script" path="res://scripts/stone.gd" id="1_pk4qv"]
+[ext_resource type="AudioStream" uid="uid://dk75mt1pc1r7v" path="res://sounds/sfx_break.wav" id="3_4v2w3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mtj70"]
 albedo_texture = ExtResource("1_5rkpx")
@@ -57,3 +58,8 @@ layers = 16
 light_energy = 0.427
 light_indirect_energy = 7.323
 light_volumetric_fog_energy = 0.0
+
+[node name="audio_stream_break" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_4v2w3")
+
+[connection signal="finished" from="audio_stream_break" to="." method="_on_audio_stream_break_finished"]
