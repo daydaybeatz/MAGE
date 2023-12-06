@@ -44,7 +44,6 @@ script/source = "extends CharacterBody3D
 var sfx_jump = preload(\"res://sounds/sfx_jump.wav\")
 
 
-var cam=1
 var swap=false
 
 var current_speed = 5
@@ -73,6 +72,11 @@ func _ready():
 
 func _input(event):
 
+	#escape to exit
+
+	if Input.is_action_just_pressed(\"escape\"):
+		get_tree().quit()
+
 	if Input.is_action_just_released(\"f\"):
 		if flash_light.visible:
 			flash_light.visible=false
@@ -85,7 +89,6 @@ func _input(event):
 		stone.visible=true
 	else:
 		stone.visible=false
-	
 	
 	#hotbar
 	
@@ -363,7 +366,9 @@ font_color = Color(0.458824, 0.458824, 0.458824, 1)
 
 [node name="player" type="CharacterBody3D" groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.723239, 0)
-wall_min_slide_angle = 1.8326
+floor_stop_on_slope = false
+floor_block_on_wall = false
+floor_max_angle = 0.219911
 script = SubResource("GDScript_nrwjd")
 
 [node name="body" type="CollisionShape3D" parent="."]
@@ -371,7 +376,7 @@ transform = Transform3D(0.71, 0, 0, 0, 0.71, 0, 0, 0, 0.71, 0, -0.207108, 0.0963
 shape = SubResource("CapsuleShape3D_0aek6")
 
 [node name="body_mesh" type="MeshInstance3D" parent="body"]
-transform = Transform3D(1.08, 0, 0, 0, 1.08, 0, 0, 0, 1.08, -0.021, 0.047, -0.026)
+transform = Transform3D(1.08, 0, 0, 0, 1.08, 0, 0, 0, 1.08, -0.021, 0.0470001, -0.026)
 transparency = 0.54
 gi_mode = 0
 visibility_range_begin = 2.5
