@@ -67,17 +67,19 @@ func _process(_delta):
 				L_interact.text = str(" LMB ")
 				if Input.is_action_just_pressed("interact_1"):
 					collider.get_parent().health-=1
+					
 					PlayerVariables.stone = PlayerVariables.stone+randi_range(1,2)
-			else:
-				L_interact.text = str("")
+			#else:
+				#L_interact.text = str("")
 			
 			if PlayerVariables.R_selector>0.9 and PlayerVariables.R_selector<2:
 				R_interact.text = str(" RMB ")
 				if Input.is_action_just_pressed("interact_2"):
 					collider.get_parent().health-=1
 					PlayerVariables.stone = PlayerVariables.stone+randi_range(1,2)
-			else:
-				R_interact.text = str("")
+			#else:
+				#L_interact.text = str("")
+				#R_interact.text = str("")
 		#if collider.get_collision_mask_value(3)==true: #is wood????
 			#if Input.is_action_pressed("interact"):
 				#c_timer = c_timer+1
@@ -88,8 +90,8 @@ func _process(_delta):
 				
 		
 	else:
-		L_interact.text = str("")
 		R_interact.text = str("")
+		L_interact.text = str("")
 		#if collider.get_collision_mask_value(2)==false:
 			#interact.text = str("")
 		

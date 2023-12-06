@@ -6,3 +6,4 @@
 albedo_texture = ExtResource("1_33t78")
 uv1_scale = Vector3(-0.04, -0.04, -0.04)
 uv1_triplanar = true
+point_size = 21.2

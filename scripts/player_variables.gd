@@ -5,8 +5,8 @@ var stone = 0
 var stamina = 100
 
 #left and right hands
-var L_selector = 0
-var R_selector = 0
+var L_selector = 1
+var R_selector = 1
 
 
 var hotbar = [0, 0, 0, 0, 0 ,0 ,0 ,0]

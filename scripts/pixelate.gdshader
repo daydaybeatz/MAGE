@@ -2,7 +2,7 @@ shader_type spatial;
 render_mode unshaded;
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 
-const int pixel_size = 4; //resolution must be divisible by pixel_size
+const int pixel_size = 6; //resolution must be divisible by pixel_size
 
 void fragment() {
 	float x = float(int(FRAGCOORD.x) % pixel_size);

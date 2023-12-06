@@ -4,14 +4,14 @@ importer="wavefront_obj"
 importer_version=1
 type="Mesh"
 uid="uid://8rudeqs3p51d"
-path="res://.godot/imported/Pickaxe.obj-d4b5ab9330024e780e5fea0bf26b69c2.mesh"
+path="res://.godot/imported/pickaxe.obj-82605c1e54c8e84f850c79457fbb63a5.mesh"
 
 [deps]
 
-files=["res://.godot/imported/Pickaxe.obj-d4b5ab9330024e780e5fea0bf26b69c2.mesh"]
+files=["res://.godot/imported/pickaxe.obj-82605c1e54c8e84f850c79457fbb63a5.mesh"]
 
-source_file="res://objects/Pickaxe.obj"
-dest_files=["res://.godot/imported/Pickaxe.obj-d4b5ab9330024e780e5fea0bf26b69c2.mesh", "res://.godot/imported/Pickaxe.obj-d4b5ab9330024e780e5fea0bf26b69c2.mesh"]
+source_file="res://objects/pickaxe.obj"
+dest_files=["res://.godot/imported/pickaxe.obj-82605c1e54c8e84f850c79457fbb63a5.mesh", "res://.godot/imported/pickaxe.obj-82605c1e54c8e84f850c79457fbb63a5.mesh"]
 
 [params]
 

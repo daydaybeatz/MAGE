@@ -4,17 +4,26 @@ extends Node3D
 @onready var area_3d = $Area3D
 @onready var health=5
 
+@onready var gpu_particles_3d = $GPUParticles3D
+
 @onready var audio_stream_break = $audio_stream_break
 
 var sfx_break = preload("res://sounds/sfx_break.wav")
 var die=false
+var c=0
 # Called when the node enters the scene tree for the first time.
 func _ready(): 
+	
+	gpu_particles_3d.visible=false
 	pass
 func _process(delta):
 	print(die)
 	if die==true:
-		queue_free()
+		c+=1
+		gpu_particles_3d.visible=true
+		self.scale -= Vector3(.01,.01,.01)
+		if c>60:
+			queue_free()
 	pass
 func _physics_process(delta):
 	if self.health<=0:
