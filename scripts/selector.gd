@@ -62,13 +62,13 @@ func _process(_delta):
 		#print(collider.get_collision_mask_value(2))
 		
 		if collider.get_collision_mask_value(2)==true: #is stone
-			if Input.is_action_just_pressed("interact_1") or Input.is_action_just_pressed("interact_2"):
+			if PlayerVariables.L_selector>0 and PlayerVariables.L_selector<2 and Input.is_action_just_pressed("interact_1") or PlayerVariables.R_selector>0 and PlayerVariables.R_selector<2 and Input.is_action_just_pressed("interact_2"):
 				collider.get_parent().health-=1
 				#c_timer = c_timer+1
 				#if c_timer>=30:
-				PlayerVariables.stone = PlayerVariables.stone+1
+				PlayerVariables.stone = PlayerVariables.stone+randi_range(1,2)
 					#c_timer=0
-			interact.text = str(" rmb/lmb ")
+				interact.text = str(" rmb/lmb ")
 					
 		#if collider.get_collision_mask_value(3)==true: #is wood????
 			#if Input.is_action_pressed("interact"):
@@ -77,12 +77,12 @@ func _process(_delta):
 					#PlayerVariables.stone = PlayerVariables.stone+1
 					#c_timer=0
 			#interact.text = str(" E ")
-	else:
-		interact.text = str("")
+		else:
+			interact.text = str("")
 		
 		#if collider.get_collision_mask_value(1)==true:
 			#interact.text = str("")
 		
 		
 		
-	debug.text = str(selector.get_collider())
+		debug.text = str(selector.get_collider())

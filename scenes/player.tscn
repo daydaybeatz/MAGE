@@ -99,15 +99,15 @@ func _input(event):
 	
 	if Input.is_action_pressed(\"L_switch\"):
 		if Input.is_action_just_released(\"scroll_up\"):
-			PlayerVariables.L_selector+=.5
+			PlayerVariables.L_selector+=.1
 		if Input.is_action_just_released(\"scroll_down\"):
-			PlayerVariables.L_selector-=.5
+			PlayerVariables.L_selector-=.1
 		
 	if Input.is_action_pressed(\"R_switch\"):
 		if Input.is_action_just_pressed(\"scroll_up\"):
-			PlayerVariables.R_selector+=.5
+			PlayerVariables.R_selector+=.1
 		if Input.is_action_just_pressed(\"scroll_down\"):
-			PlayerVariables.R_selector-=.5
+			PlayerVariables.R_selector-=.1
 
 
 	#view
