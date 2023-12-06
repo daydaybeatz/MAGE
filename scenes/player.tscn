@@ -369,6 +369,7 @@ fov = 57.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="head/SpringArm3D/Camera3D"]
 transform = Transform3D(2.025, 0, 0, 0, 2.025, 0, 0, 0, 2.025, 0, 0, -0.0970974)
+visible = false
 mesh = SubResource("QuadMesh_0ju1v")
 surface_material_override/0 = SubResource("ShaderMaterial_lf0mm")
 
