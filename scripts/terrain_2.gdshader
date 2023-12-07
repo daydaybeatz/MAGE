@@ -49,8 +49,8 @@ void fragment() {
 
 	ALBEDO = mix(albedo_tex_bg, albedo_tex_fg, mask);
 	vec3 mixed_orm = mix(orm_tex_bg, orm_tex_fg, mask);
-	AO = mixed_orm.r;
+	AO = mixed_orm.r/4.0;
 	ROUGHNESS = mixed_orm.g*4.0;
-	METALLIC = mixed_orm.b/4.0;
+	METALLIC = mixed_orm.b/8.0;
 	NORMAL_MAP = mix(normal_tex_bg, normal_tex_fg, mask);
 }

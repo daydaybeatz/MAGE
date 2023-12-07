@@ -25,8 +25,8 @@ func _process(delta):
 	if die==true:
 		c+=1
 		gpu_particles_3d.visible=true
-		self.scale -= Vector3(.01,.01,.01)
-		if c>60:
+		self.scale -= Vector3(.03,.04,.04)
+		if c>35:
 			queue_free()
 	pass
 func _physics_process(delta):

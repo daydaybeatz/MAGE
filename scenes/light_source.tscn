@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://coe076jgmp17"]
+
+[node name="light_source" type="Node3D"]
+transform = Transform3D(1.595, 0, 0, 0, 1.595, 0, 0, 0, 1.595, 0, 0.225, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(0.626959, 0, 0, 0, -2.74053e-08, -0.626959, 0, 0.626959, -2.74053e-08, 0, 0.394742, 0)
+light_color = Color(0.803922, 0.458824, 0.431373, 1)
+light_energy = 1.438
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 2.633
+light_specular = 2.0
+shadow_enabled = true
+shadow_bias = 0.895
+omni_range = 34.105
+omni_attenuation = 0.392292
+
+[node name="glass" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0159357, 0)
+transparency = 0.71
+cast_shadow = 0
+use_collision = true
+radius = 0.115
+height = 0.132
+
+[node name="housing" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0159357, 0)
+radius = 0.05
+height = 0.132

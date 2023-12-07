@@ -68,7 +68,7 @@ var gravity = ProjectSettings.get_setting(\"physics/3d/default_gravity\")
 func _ready():
 	#camera_3d.transform()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) #constraints mouse
-	
+	flash_light.visible=false
 
 func _input(event):
 
@@ -77,11 +77,28 @@ func _input(event):
 	if Input.is_action_just_pressed(\"escape\"):
 		get_tree().quit()
 
+#flash_light
+
 	if Input.is_action_just_released(\"f\"):
 		if flash_light.visible:
 			flash_light.visible=false
 		else:
 			flash_light.visible=true
+			
+			
+	if not Input.is_action_pressed(\"L_switch\") and not Input.is_action_pressed(\"R_switch\"):
+		if Input.is_action_just_released(\"scroll_up\"):
+			if flash_light.spot_angle>=25:
+				flash_light.spot_angle-=5
+				flash_light.spot_range-=.5
+				flash_light.light_energy+=1
+		if Input.is_action_just_released(\"scroll_down\"):
+			if flash_light.spot_angle<=45:
+				flash_light.spot_angle+=5
+				flash_light.spot_range+=.5
+				flash_light.light_energy-=1
+	
+	
 		
 	#inventory
 	
@@ -155,11 +172,11 @@ func _input(event):
 		if Input.is_action_just_released(\"scroll_up\") and spring_arm_3d.position.z>0:
 			spring_arm_3d.transform.origin.z-=.5
 			spring_arm_3d.transform.origin.y-=.1
-			#selector.target_position.y-=.10
+			selector.target_position.y-=.10
 		if Input.is_action_just_released(\"scroll_down\") and spring_arm_3d.position.z<5:
 			spring_arm_3d.transform.origin.z+=.5
 			spring_arm_3d.transform.origin.y+=.1
-			#selector.target_position.y+=.10
+			selector.target_position.y+=.10
 			
 	#if Input.is_action_just_released(\"view\") and cam==2:
 		#spring_arm_3d.transform.origin.z-=4
@@ -221,8 +238,9 @@ func _physics_process(delta):
 			if velocity.x!=0 or velocity.y!=0:
 				PlayerVariables.stamina -= .05
 			
-			if Input.is_action_pressed(\"cheat\") :
-				current_speed=sprinting_speed*25	
+			if Input.is_action_pressed(\"cheat\"):
+				current_speed=sprinting_speed*25
+				
 		#if Input.is_action_just_released(\"sprint\") and not is_on_floor():
 			#current_speed=sprinting_speed
 			
@@ -251,7 +269,7 @@ func _physics_process(delta):
 			
 	# Handle Jump.
 	
-	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor() and jump_count<2:
+	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
 		
 		#jump sound
 		
@@ -261,8 +279,10 @@ func _physics_process(delta):
 		#jump_count=jump_count+1
 		#if Input.is_action_pressed(\"crouch\"):
 			#velocity.y = big_jump_velocity
-		
-		#else:
+		if Input.is_action_pressed(\"cheat\"):
+			velocity.y = jump_velocity*4
+			current_speed=walking_speed*5
+		else:
 			velocity.y = jump_velocity
 			if current_speed>0:
 				PlayerVariables.stamina-=2.6
@@ -403,13 +423,12 @@ render_priority = 2
 texture = ExtResource("5_qg2yq")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.159148, -0.078425)
-collision_mask = 2
-spring_length = 2.685
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62935, 1.2638)
+collision_mask = 3
 margin = 0.735
 
 [node name="Camera3D" type="Camera3D" parent="head/SpringArm3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.305895, -0.196811)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.000557661, -1.61444)
 current = true
 fov = 57.0
 
@@ -420,9 +439,10 @@ mesh = SubResource("QuadMesh_0ju1v")
 surface_material_override/0 = SubResource("ShaderMaterial_lf0mm")
 
 [node name="flash_light" type="SpotLight3D" parent="head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0661274, 0.41783)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.326234, 0.351963)
+visible = false
 light_color = Color(1, 1, 0.901961, 1)
-light_energy = 3.296
+light_energy = 10.023
 light_indirect_energy = 0.0
 light_volumetric_fog_energy = 0.0
 light_specular = 0.0
@@ -432,15 +452,15 @@ distance_fade_enabled = true
 distance_fade_begin = 46.55
 distance_fade_shadow = 65.7
 distance_fade_length = 457.03
-spot_range = 24.829
-spot_attenuation = 1.1487
-spot_angle = 39.33
+spot_range = 658.252
+spot_attenuation = 1.10957
+spot_angle = 25.0
 spot_angle_attenuation = 0.933035
 
 [node name="r_arm" type="Node3D" parent="head"]
 
 [node name="r_empty" type="CollisionShape3D" parent="head/r_arm"]
-transform = Transform3D(0.478526, -0.0357536, 0.011617, 0.0185182, 0.353265, 0.324439, -0.0327162, -0.322995, 0.353559, 1.04448, -0.452746, 0.166094)
+transform = Transform3D(-0.0596232, -0.0628328, 0.472119, -0.192875, 0.43823, 0.0339643, -0.435482, -0.18549, -0.079682, 1.04448, -0.452746, 0.166094)
 shape = SubResource("CylinderShape3D_11so2")
 
 [node name="r_arm_mesh" type="MeshInstance3D" parent="head/r_arm/r_empty"]
@@ -478,7 +498,7 @@ mesh = SubResource("CylinderMesh_7mtok")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.65339, -0.246104, -0.940129)
 
 [node name="r_pickaxe_mesh" type="MeshInstance3D" parent="head/r_arm/r_pickaxe"]
-transform = Transform3D(0.078267, 0.00643484, 0.0152598, 2.90167e-05, 0.0736608, -0.0312104, -0.0165611, 0.0305398, 0.0720628, -0.907951, -0.482595, 0.294574)
+transform = Transform3D(0.0792209, 0.00431849, 0.0102658, 2.90166e-05, 0.0736608, -0.0312104, -0.0111372, 0.0309101, 0.0729419, -0.907951, -0.482595, 0.294574)
 mesh = ExtResource("6_q6n2l")
 surface_material_override/0 = SubResource("StandardMaterial3D_mu1c1")
 surface_material_override/1 = SubResource("StandardMaterial3D_81udh")
@@ -486,7 +506,7 @@ surface_material_override/1 = SubResource("StandardMaterial3D_81udh")
 [node name="l_arm" type="Node3D" parent="head"]
 
 [node name="l_empty" type="CollisionShape3D" parent="head/l_arm"]
-transform = Transform3D(0.479195, 0.0264295, -0.00858749, -0.0136889, 0.353578, 0.324338, 0.0241843, -0.323549, 0.353738, -1.01733, -0.478537, 0.218382)
+transform = Transform3D(-0.0108549, -0.030472, -0.478908, 0.186032, 0.441304, -0.0322954, 0.442351, -0.186339, 0.00182991, -1.01733, -0.478537, 0.218382)
 shape = SubResource("CylinderShape3D_11so2")
 
 [node name="l_arm_mesh" type="MeshInstance3D" parent="head/l_arm/l_empty"]
@@ -524,7 +544,7 @@ mesh = SubResource("CylinderMesh_7mtok")
 transform = Transform3D(0.911152, -0.16026, -0.37963, 0.0706613, 0.968393, -0.239211, 0.405967, 0.191132, 0.893677, -1.23822, -0.162285, -1.54872)
 
 [node name="l_pickaxe_mesh" type="MeshInstance3D" parent="head/l_arm/l_pickaxe"]
-transform = Transform3D(0.0721341, 0.00947497, 0.03327, -0.00357944, 0.078572, -0.0146158, -0.0344072, 0.0116902, 0.0712705, 0.841968, -0.482595, 0.894946)
+transform = Transform3D(0.0761631, 0.00528316, 0.0239013, -0.00141074, 0.078932, -0.0129518, -0.0244376, 0.0119092, 0.0752395, 0.841968, -0.482595, 0.894946)
 mesh = ExtResource("6_q6n2l")
 surface_material_override/0 = SubResource("StandardMaterial3D_mu1c1")
 surface_material_override/1 = SubResource("StandardMaterial3D_81udh")
