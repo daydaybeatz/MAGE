@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dc5uns10iil6t"
+path="res://.godot/imported/map_course.obj-6218c601d5275cc52a3cb8daf54dccf6.mesh"
+
+[deps]
+
+files=["res://.godot/imported/map_course.obj-6218c601d5275cc52a3cb8daf54dccf6.mesh"]
+
+source_file="res://objects/map_course.obj"
+dest_files=["res://.godot/imported/map_course.obj-6218c601d5275cc52a3cb8daf54dccf6.mesh", "res://.godot/imported/map_course.obj-6218c601d5275cc52a3cb8daf54dccf6.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

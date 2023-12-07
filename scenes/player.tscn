@@ -377,6 +377,7 @@ shape = SubResource("CapsuleShape3D_0aek6")
 
 [node name="body_mesh" type="MeshInstance3D" parent="body"]
 transform = Transform3D(1.08, 0, 0, 0, 1.08, 0, 0, 0, 1.08, -0.021, 0.0470001, -0.026)
+visible = false
 transparency = 0.54
 gi_mode = 0
 visibility_range_begin = 2.5
@@ -402,7 +403,7 @@ render_priority = 2
 texture = ExtResource("5_qg2yq")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.397032, -1.50181)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.159148, -0.078425)
 collision_mask = 2
 spring_length = 2.685
 margin = 0.735
@@ -419,8 +420,7 @@ mesh = SubResource("QuadMesh_0ju1v")
 surface_material_override/0 = SubResource("ShaderMaterial_lf0mm")
 
 [node name="flash_light" type="SpotLight3D" parent="head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0661274, -0.455906)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0661274, 0.41783)
 light_color = Color(1, 1, 0.901961, 1)
 light_energy = 3.296
 light_indirect_energy = 0.0
