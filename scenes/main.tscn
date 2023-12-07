@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ceotix1oe2tmn"]
+[gd_scene load_steps=25 format=3 uid="uid://ceotix1oe2tmn"]
 
 [ext_resource type="PackedScene" uid="uid://bnrg2y6yyfgwu" path="res://scenes/player.tscn" id="2_ai8jb"]
 [ext_resource type="PackedScene" uid="uid://coe076jgmp17" path="res://scenes/light_source.tscn" id="3_601p6"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c6jyho1f7gnqx" path="res://scenes/terrain.tscn" id="4_rt1hw"]
 [ext_resource type="Texture2D" uid="uid://cbiji5tw40d53" path="res://textures/texture_metal_2.png" id="6_6ps0c"]
 [ext_resource type="ArrayMesh" uid="uid://wwyjq3gddsvw" path="res://objects/map_gazebo_corner.obj" id="7_2vfag"]
+[ext_resource type="PackedScene" uid="uid://cfiij5wn8gv8k" path="res://scenes/my_man.tscn" id="10_buuf4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c4gcm"]
 sky_top_color = Color(0.231373, 0.278431, 0.368627, 1)
@@ -250,3 +251,9 @@ transform = Transform3D(1.248, 0, 0, 0, 1.248, 0, 0, 0, 1.248, -45.6193, 16.2179
 
 [node name="stone6" parent="terrain/level_4" instance=ExtResource("3_t7nwq")]
 transform = Transform3D(1.248, 0, 0, 0, 1.248, 0, 0, 0, 1.248, -25.3795, 16.2179, -7.44698)
+
+[node name="My-man" parent="." instance=ExtResource("10_buuf4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.673, 162.055, -6.57915)
+
+[node name="My-man2" parent="." instance=ExtResource("10_buuf4")]
+transform = Transform3D(-0.169766, 0, 2.30559, 0, 1.71774, 0, -1.91807, 0, -0.204065, 63.1634, 189.951, -18.7574)
