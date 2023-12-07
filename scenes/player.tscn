@@ -7,7 +7,7 @@
 [ext_resource type="Shader" path="res://scripts/pixelate.gdshader" id="4_gq05i"]
 [ext_resource type="Texture2D" uid="uid://drx4udtnlg38r" path="res://textures/ui_box_1.png" id="5_30qmg"]
 [ext_resource type="Texture2D" uid="uid://8y3h2hv8cr5e" path="res://textures/crosshair_5.png" id="5_qg2yq"]
-[ext_resource type="ArrayMesh" uid="uid://8rudeqs3p51d" path="res://objects/pickaxe.obj" id="6_q6n2l"]
+[ext_resource type="ArrayMesh" uid="uid://8rudeqs3p51d" path="res://objects/Pickaxe.obj" id="6_q6n2l"]
 [ext_resource type="Texture2D" uid="uid://bedundxgpiqrc" path="res://textures/texture_stone.jpg" id="7_2vkkk"]
 [ext_resource type="LabelSettings" uid="uid://cprcxoi0bhijf" path="res://textures/font_settings_1.tres" id="10_op6uk"]
 [ext_resource type="AudioStream" uid="uid://3rie7q3qww5b" path="res://sounds/sfx_jump_2.wav" id="11_38ekj"]
