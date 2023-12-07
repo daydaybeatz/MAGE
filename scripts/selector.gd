@@ -2,19 +2,18 @@ extends RayCast3D
 
 
 #@onready var stone_label = $"../../../player_gui/stone"
-@onready var stone_label = $"../../player_gui/AspectRatioContainer2/stone"
+
+@onready var stone = $"../../player_gui/ui_inventory/stone"
 
 @onready var l_arm = $"../l_arm"
 @onready var r_arm = $"../r_arm"
 
 
-@onready var debug = $"../../player_gui/AspectRatioContainer2/debug"
-
 @onready var selector = $"."
 
-@onready var L_interact = $"../../player_gui/AspectRatioContainer2/L_interact"
-@onready var R_interact = $"../../player_gui/AspectRatioContainer2/R_interact"
 
+@onready var L_interact = $"../../player_gui/ui_interact/L_interact"
+@onready var R_interact = $"../../player_gui/ui_interact/R_interact"
 
 
 
@@ -56,8 +55,8 @@ func _process(_delta):
 	if selector.is_colliding():
 		
 		var collider=selector.get_collider()
+		PlayerVariables.collider=collider.get_parent()
 		
-		debug.text = str(selector.get_collider())
 		
 		if collider.get_collision_mask_value(2)==true: #pointing at a rock
 			
@@ -77,6 +76,10 @@ func _process(_delta):
 				if Input.is_action_just_pressed("interact_2"):
 					collider.get_parent().health-=1
 					PlayerVariables.stone = PlayerVariables.stone+randi_range(1,2)
+			
+			
+			
+			
 			#else:
 				#L_interact.text = str("")
 				#R_interact.text = str("")
@@ -96,5 +99,5 @@ func _process(_delta):
 			#interact.text = str("")
 		
 		
-		
-		
+
+

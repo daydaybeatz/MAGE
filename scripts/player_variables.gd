@@ -3,6 +3,7 @@ extends Node
 
 var stone = 0
 var stamina = 100
+var collider = Object
 
 #left and right hands
 var L_selector = 0

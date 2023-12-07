@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 
 PlayerVariables="*res://scripts/player_variables.gd"
 
+[display]
+
+window/size/mode=3
+window/stretch/mode="canvas_items"
+
 [gui]
 
 theme/custom_font="res://textures/8bitlim.ttf"

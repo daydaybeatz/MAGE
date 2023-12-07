@@ -1,8 +1,7 @@
-[gd_scene load_steps=30 format=3 uid="uid://bnrg2y6yyfgwu"]
+[gd_scene load_steps=28 format=3 uid="uid://bnrg2y6yyfgwu"]
 
 [ext_resource type="Script" path="res://scripts/CanvasLayer.gd" id="1_0kysu"]
 [ext_resource type="Texture2D" uid="uid://c2k0hh6xesjg0" path="res://textures/texture_dirt.png" id="1_003ta"]
-[ext_resource type="Texture2D" uid="uid://dwwfk2py081p4" path="res://textures/fps_sniper.png" id="2_ehm3o"]
 [ext_resource type="Material" uid="uid://bxpejmo36j5d6" path="res://textures/skin_1.tres" id="2_ym077"]
 [ext_resource type="Script" path="res://scripts/selector.gd" id="3_fusd2"]
 [ext_resource type="Shader" path="res://scripts/pixelate.gdshader" id="4_gq05i"]
@@ -10,7 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://8y3h2hv8cr5e" path="res://textures/crosshair_5.png" id="5_qg2yq"]
 [ext_resource type="ArrayMesh" uid="uid://8rudeqs3p51d" path="res://objects/pickaxe.obj" id="6_q6n2l"]
 [ext_resource type="Texture2D" uid="uid://bedundxgpiqrc" path="res://textures/texture_stone.jpg" id="7_2vkkk"]
-[ext_resource type="AudioStream" uid="uid://csycyf60m1p62" path="res://sounds/sfx_jump.wav" id="9_lrg2w"]
+[ext_resource type="LabelSettings" uid="uid://cprcxoi0bhijf" path="res://textures/font_settings_1.tres" id="10_op6uk"]
+[ext_resource type="AudioStream" uid="uid://3rie7q3qww5b" path="res://sounds/sfx_jump_2.wav" id="11_38ekj"]
 
 [sub_resource type="GDScript" id="GDScript_nrwjd"]
 script/source = "extends CharacterBody3D
@@ -25,7 +25,6 @@ script/source = "extends CharacterBody3D
 @onready var spring_arm_3d = $head/SpringArm3D
 @onready var flash_light = $head/flash_light
 
-
 @onready var l_arm_mesh = $head/l_arm/l_empty/l_arm_mesh
 @onready var l_pickaxe_mesh = $head/l_arm/l_pickaxe/l_pickaxe_mesh
 
@@ -36,12 +35,13 @@ script/source = "extends CharacterBody3D
 
 @onready var camera_3d = $head/SpringArm3D/Camera3D
 
-@onready var stone = $player_gui/AspectRatioContainer2/stone
-
+@onready var stone = $player_gui/ui_inventory/stone
 
 @onready var audio_stream_jump = $audio_stream_jump
 
-var sfx_jump = preload(\"res://sounds/sfx_jump.wav\")
+
+
+var sfx_jump_2 = preload(\"res://sounds/sfx_jump_2.wav\")
 
 
 var swap=false
@@ -218,7 +218,9 @@ func _physics_process(delta):
 		head.position.y = lerp(head.position.y,1.0,delta*lerp_speed)
 		if Input.is_action_pressed(\"sprint\") and is_on_floor() and PlayerVariables.stamina>.05:
 			current_speed=sprinting_speed
-			PlayerVariables.stamina -= .05
+			if velocity.x!=0 or velocity.y!=0:
+				PlayerVariables.stamina -= .05
+			
 			if Input.is_action_pressed(\"cheat\") :
 				current_speed=sprinting_speed*25	
 		#if Input.is_action_just_released(\"sprint\") and not is_on_floor():
@@ -232,7 +234,6 @@ func _physics_process(delta):
 			#current_speed=sprinting_speed
 			
 			
-			
 	if is_on_floor() and not Input.is_action_pressed(\"sprint\"):
 		
 		current_speed=walking_speed
@@ -241,6 +242,7 @@ func _physics_process(delta):
 		#if current_speed==sprinting_speed*1.7 and Input.is_action_just_pressed(\"ui_accept\"):
 				#velocity.y = jump_velocity*1.4
 		velocity.y -= gravity * delta
+		
 		
 		#air dash
 		
@@ -254,12 +256,12 @@ func _physics_process(delta):
 		#jump sound
 		
 		if not audio_stream_jump.is_playing():
-			audio_stream_jump.stream = sfx_jump
+			audio_stream_jump.stream = sfx_jump_2
 			audio_stream_jump.play()
 		#jump_count=jump_count+1
 		#if Input.is_action_pressed(\"crouch\"):
 			#velocity.y = big_jump_velocity
-			
+		
 		#else:
 			velocity.y = jump_velocity
 			if current_speed>0:
@@ -278,9 +280,12 @@ func _physics_process(delta):
 	#print(current_speed)
 	move_and_slide()
 
+
 "
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0aek6"]
+margin = 0.914
+radius = 0.6
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_34he7"]
 albedo_color = Color(0.392157, 0.392157, 0.392157, 1)
@@ -347,22 +352,17 @@ func _process(_delta):
 	
 "
 
+[sub_resource type="LabelSettings" id="LabelSettings_wtiho"]
+font_size = 25
+font_color = Color(0.635294, 0.635294, 0.635294, 1)
+outline_size = 20
+outline_color = Color(0.258824, 0.258824, 0.258824, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_hvgyn"]
 font_size = 28
 font_color = Color(0.2, 0.12549, 0.2, 1)
 shadow_size = 10
 shadow_color = Color(0.435294, 0.443137, 0.419608, 0.717647)
-
-[sub_resource type="LabelSettings" id="LabelSettings_wtiho"]
-font_color = Color(0.635294, 0.635294, 0.635294, 1)
-outline_size = 3
-outline_color = Color(0.258824, 0.258824, 0.258824, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_kmab1"]
-font_color = Color(0.431373, 0.431373, 0.431373, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_sun48"]
-font_color = Color(0.458824, 0.458824, 0.458824, 1)
 
 [node name="player" type="CharacterBody3D" groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.723239, 0)
@@ -402,38 +402,45 @@ render_priority = 2
 texture = ExtResource("5_qg2yq")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.627223, -0.0315119)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.397032, -1.50181)
+collision_mask = 2
+spring_length = 2.685
+margin = 0.735
 
 [node name="Camera3D" type="Camera3D" parent="head/SpringArm3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.43436, 0.569464)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.305895, -0.196811)
 current = true
 fov = 57.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="head/SpringArm3D/Camera3D"]
-transform = Transform3D(2.025, 0, 0, 0, 2.025, 0, 0, 0, 2.025, 0, 0, -0.0970974)
+transform = Transform3D(2.025, 0, 0, 0, 2.025, 0, 0, 0, 2.025, 0, 0, -0.82486)
 material_override = SubResource("ShaderMaterial_lf0mm")
 mesh = SubResource("QuadMesh_0ju1v")
 surface_material_override/0 = SubResource("ShaderMaterial_lf0mm")
 
 [node name="flash_light" type="SpotLight3D" parent="head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.174416, -1.00444)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0661274, -0.455906)
+visible = false
 light_color = Color(1, 1, 0.901961, 1)
-light_energy = 8.657
+light_energy = 3.296
 light_indirect_energy = 0.0
-light_volumetric_fog_energy = 0.372
+light_volumetric_fog_energy = 0.0
 light_specular = 0.0
 shadow_enabled = true
 shadow_blur = 6.233
 distance_fade_enabled = true
-spot_range = 55.4951
-spot_attenuation = 1.41422
-spot_angle = 50.5995
-spot_angle_attenuation = 0.406127
+distance_fade_begin = 46.55
+distance_fade_shadow = 65.7
+distance_fade_length = 457.03
+spot_range = 24.829
+spot_attenuation = 1.1487
+spot_angle = 39.33
+spot_angle_attenuation = 0.933035
 
 [node name="r_arm" type="Node3D" parent="head"]
 
 [node name="r_empty" type="CollisionShape3D" parent="head/r_arm"]
-transform = Transform3D(0.478526, -0.0357536, 0.011617, 6.25157e-09, 0.148328, 0.456507, -0.0375935, -0.455105, 0.147873, 1.04448, -0.0817611, 0.999422)
+transform = Transform3D(0.478526, -0.0357536, 0.011617, 0.0185182, 0.353265, 0.324439, -0.0327162, -0.322995, 0.353559, 1.04448, -0.452746, 0.166094)
 shape = SubResource("CylinderShape3D_11so2")
 
 [node name="r_arm_mesh" type="MeshInstance3D" parent="head/r_arm/r_empty"]
@@ -468,7 +475,7 @@ material_override = ExtResource("2_ym077")
 mesh = SubResource("CylinderMesh_7mtok")
 
 [node name="r_pickaxe" type="CollisionShape3D" parent="head/r_arm"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.65339, 0, -0.0605814)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.65339, -0.246104, -0.940129)
 
 [node name="r_pickaxe_mesh" type="MeshInstance3D" parent="head/r_arm/r_pickaxe"]
 transform = Transform3D(0.078267, 0.00643484, 0.0152598, 2.90167e-05, 0.0736608, -0.0312104, -0.0165611, 0.0305398, 0.0720628, -0.907951, -0.482595, 0.294574)
@@ -479,7 +486,7 @@ surface_material_override/1 = SubResource("StandardMaterial3D_81udh")
 [node name="l_arm" type="Node3D" parent="head"]
 
 [node name="l_empty" type="CollisionShape3D" parent="head/l_arm"]
-transform = Transform3D(0.479195, 0.0264295, -0.00858749, 1.80856e-08, 0.148328, 0.456507, 0.0277897, -0.455741, 0.148079, -1.01733, -0.0784498, 1.05763)
+transform = Transform3D(0.479195, 0.0264295, -0.00858749, -0.0136889, 0.353578, 0.324338, 0.0241843, -0.323549, 0.353738, -1.01733, -0.478537, 0.218382)
 shape = SubResource("CylinderShape3D_11so2")
 
 [node name="l_arm_mesh" type="MeshInstance3D" parent="head/l_arm/l_empty"]
@@ -514,7 +521,7 @@ material_override = ExtResource("2_ym077")
 mesh = SubResource("CylinderMesh_7mtok")
 
 [node name="l_pickaxe" type="CollisionShape3D" parent="head/l_arm"]
-transform = Transform3D(0.911152, -0.16026, -0.37963, 0.0706613, 0.968393, -0.239211, 0.405967, 0.191132, 0.893677, -1.23822, 0.0838192, -0.66917)
+transform = Transform3D(0.911152, -0.16026, -0.37963, 0.0706613, 0.968393, -0.239211, 0.405967, 0.191132, 0.893677, -1.23822, -0.162285, -1.54872)
 
 [node name="l_pickaxe_mesh" type="MeshInstance3D" parent="head/l_arm/l_pickaxe"]
 transform = Transform3D(0.0721341, 0.00947497, 0.03327, -0.00357944, 0.078572, -0.0146158, -0.0344072, 0.0116902, 0.0712705, 0.841968, -0.482595, 0.894946)
@@ -526,52 +533,132 @@ surface_material_override/1 = SubResource("StandardMaterial3D_81udh")
 script = SubResource("GDScript_ojkxx")
 
 [node name="player_gui" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
 script = ExtResource("1_0kysu")
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="player_gui"]
-custom_minimum_size = Vector2(1142, 648)
+[node name="ui_interact" type="BoxContainer" parent="player_gui"]
 layout_direction = 1
 anchors_preset = -1
-anchor_left = 0.003
-anchor_right = 0.995
-anchor_bottom = 1.0
-offset_left = 401.544
-offset_top = 283.0
-offset_right = 400.76
-offset_bottom = 283.0
+anchor_left = 0.487
+anchor_top = 0.593
+anchor_right = 0.507
+anchor_bottom = 0.632
+offset_left = 14.976
+offset_top = 27.7359
+offset_right = 35.936
+offset_bottom = 49.464
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.293876, 0.546134)
+scale = Vector2(0.52, 0.546829)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-stretch_mode = 3
 
-[node name="Sprite2D" type="Sprite2D" parent="player_gui/AspectRatioContainer"]
-visible = false
-position = Vector2(-106.5, 60.75)
-scale = Vector2(2.297, -1.957)
-texture = ExtResource("2_ehm3o")
-flip_v = true
+[node name="L_interact" type="Label" parent="player_gui/ui_interact"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "X"
+label_settings = SubResource("LabelSettings_wtiho")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="AspectRatioContainer2" type="Node" parent="player_gui"]
+[node name="R_interact" type="Label" parent="player_gui/ui_interact"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "X"
+label_settings = SubResource("LabelSettings_wtiho")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="stamina" type="ProgressBar" parent="player_gui/AspectRatioContainer2"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0.431373, 0, 1)
-offset_left = 443.0
-offset_top = 624.0
-offset_right = 1091.0
-offset_bottom = 628.0
-scale = Vector2(0.439999, 3.32)
+[node name="ui_r_equip" type="BoxContainer" parent="player_gui"]
+anchors_preset = -1
+anchor_left = 0.569
+anchor_top = 0.873
+anchor_right = 0.613
+anchor_bottom = 0.951
+offset_left = -51.488
+offset_top = 0.295959
+offset_right = -27.176
+offset_bottom = 27.752
+scale = Vector2(0.65, 0.65)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="R_equip_ui" type="Sprite2D" parent="player_gui/ui_r_equip"]
+modulate = Color(1, 1, 1, 0.501961)
+position = Vector2(6.15381, 40)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("5_30qmg")
+
+[node name="R_equip" type="Label" parent="player_gui/ui_r_equip"]
+layout_mode = 2
+text = "R"
+label_settings = ExtResource("10_op6uk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ui_l_equip" type="BoxContainer" parent="player_gui"]
+anchors_preset = -1
+anchor_left = 0.461
+anchor_top = 0.844
+anchor_right = 0.523
+anchor_bottom = 0.963
+offset_left = 3.9281
+offset_top = 19.088
+offset_right = 16.5042
+offset_bottom = 20.976
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.65, 0.65)
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="L_equip_ui" type="Sprite2D" parent="player_gui/ui_l_equip"]
+modulate = Color(1, 1, 1, 0.501961)
+position = Vector2(4.61523, 40)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("5_30qmg")
+
+[node name="L_equip" type="Label" parent="player_gui/ui_l_equip"]
+layout_mode = 2
+text = "L"
+label_settings = ExtResource("10_op6uk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ui_stats" type="BoxContainer" parent="player_gui"]
+anchors_preset = -1
+anchor_left = 0.396
+anchor_top = 0.971
+anchor_right = 0.641
+anchor_bottom = 0.989
+offset_left = -20.192
+offset_top = -3.20807
+offset_right = 397.568
+offset_bottom = -2.87201
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.402861, 0.97801)
+size_flags_horizontal = 0
 size_flags_vertical = 8
+
+[node name="stamina" type="ProgressBar" parent="player_gui/ui_stats"]
+modulate = Color(0.831373, 0.709804, 0.231373, 1)
+self_modulate = Color(0.658824, 0.576471, 0.223529, 1)
+custom_minimum_size = Vector2(700, 12)
+layout_mode = 2
+size_flags_horizontal = 3
 rounded = true
 show_percentage = false
 
-[node name="stone" type="Label" parent="player_gui/AspectRatioContainer2"]
+[node name="ui_inventory" type="BoxContainer" parent="player_gui"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="stone" type="Label" parent="player_gui/ui_inventory"]
 visible = false
-offset_left = 6.0
-offset_right = 76.0
-offset_bottom = 34.0
+layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "stone"
@@ -579,78 +666,10 @@ label_settings = SubResource("LabelSettings_hvgyn")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="L_interact" type="Label" parent="player_gui/AspectRatioContainer2"]
-offset_left = 242.0
-offset_top = 375.0
-offset_right = 890.0
-offset_bottom = 396.0
-size_flags_horizontal = 6
-size_flags_vertical = 6
-text = "X"
-label_settings = SubResource("LabelSettings_wtiho")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="R_interact" type="Label" parent="player_gui/AspectRatioContainer2"]
-offset_left = 278.0
-offset_top = 375.0
-offset_right = 926.0
-offset_bottom = 396.0
-size_flags_horizontal = 6
-size_flags_vertical = 6
-text = "X"
-label_settings = SubResource("LabelSettings_wtiho")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="debug" type="Label" parent="player_gui/AspectRatioContainer2"]
-visible = false
-offset_left = 247.0
-offset_top = 313.0
-offset_right = 895.0
-offset_bottom = 334.0
-text = "000"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="AspectRatioContainer3" type="Node" parent="player_gui"]
-
-[node name="L_equip_ui" type="Sprite2D" parent="player_gui/AspectRatioContainer3"]
-modulate = Color(1, 1, 1, 0.427451)
-position = Vector2(549, 590.625)
-scale = Vector2(0.40625, 0.416015)
-texture = ExtResource("5_30qmg")
-
-[node name="R_equip_ui" type="Sprite2D" parent="player_gui/AspectRatioContainer3"]
-modulate = Color(1, 1, 1, 0.427451)
-position = Vector2(625, 590.625)
-scale = Vector2(0.398437, 0.408203)
-texture = ExtResource("5_30qmg")
-
-[node name="L_equip" type="Label" parent="player_gui/AspectRatioContainer3"]
-offset_left = 543.0
-offset_top = 580.625
-offset_right = 629.0
-offset_bottom = 601.625
-text = "LEFT"
-label_settings = SubResource("LabelSettings_kmab1")
-vertical_alignment = 1
-
-[node name="R_equip" type="Label" parent="player_gui/AspectRatioContainer3"]
-offset_left = 543.0
-offset_top = 580.625
-offset_right = 629.0
-offset_bottom = 601.625
-text = "RIGHT"
-label_settings = SubResource("LabelSettings_sun48")
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Area3D" type="Area3D" parent="."]
-visible = false
+[node name="audio_stream_land" type="AudioStreamPlayer3D" parent="."]
 
 [node name="audio_stream_jump" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("9_lrg2w")
-volume_db = -19.592
+stream = ExtResource("11_38ekj")
+volume_db = -13.634
 max_db = 2.885
 attenuation_filter_db = -21.5

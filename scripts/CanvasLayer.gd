@@ -1,11 +1,15 @@
 extends CanvasLayer
-@onready var l_equip = $AspectRatioContainer3/L_equip
-@onready var r_equip = $AspectRatioContainer3/R_equip
+
+@onready var l_equip = $ui_l_equip/L_equip
+@onready var r_equip = $ui_r_equip/R_equip
 
 
 #player gui
-@onready var stone = $AspectRatioContainer2/stone
-@onready var stamina = $AspectRatioContainer2/stamina
+
+@onready var stone = $ui_inventory/stone
+
+
+@onready var stamina = $ui_stats/stamina
 
 
 # Called when the node enters the scene tree for the first time.

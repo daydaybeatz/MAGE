@@ -8,8 +8,8 @@ void fragment() {
 	float x = float(int(FRAGCOORD.x) % pixel_size);
 	float y = float(int(FRAGCOORD.y) % pixel_size);
 
-	x = FRAGCOORD.x + floor(float(pixel_size) / 2.0) - x;
-	y = FRAGCOORD.y + floor(float(pixel_size) / 2.0) - y;
+	x = FRAGCOORD.x + floor(float(pixel_size) / 1.0) - x;
+	y = FRAGCOORD.y + floor(float(pixel_size) / 1.0) - y;
 
 	ALBEDO = texture(SCREEN_TEXTURE, vec2(x, y) / VIEWPORT_SIZE).xyz;
 }
