@@ -33,16 +33,16 @@ func _physics_process(delta):
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir = Input.get_vector("left", "right", "up", "down")
-	var direction = (transform.basis * Vector3(input_dir.x, .01, input_dir.y)).normalized()
-	direction = direction.rotated(Vector3.UP, spring_arm_pivot.rotation.y)
-	if direction:
-		velocity.x = lerp(velocity.x, direction.x * SPEED, LERP_VAL)
-		velocity.z = lerp(velocity.z, direction.z * SPEED, LERP_VAL)
-		armature.rotation.y = lerp_angle(armature.rotation.y, atan2(-velocity.x, -velocity.z), LERP_VAL)
-	else:
-		velocity.x = lerp(velocity.x, 0.0, LERP_VAL)
-		velocity.z = lerp(velocity.z, 0.0, LERP_VAL)
+#	var input_dir = Input.get_vector("left", "right", "up", "down")
+#	var direction = (transform.basis * Vector3(input_dir.x, .01, input_dir.y)).normalized()
+#	direction = direction.rotated(Vector3.UP, spring_arm_pivot.rotation.y)
+#	if direction:
+#		velocity.x = lerp(velocity.x, direction.x * SPEED, LERP_VAL)
+#		velocity.z = lerp(velocity.z, direction.z * SPEED, LERP_VAL)
+#		armature.rotation.y = lerp_angle(armature.rotation.y, atan2(-velocity.x, -velocity.z), LERP_VAL)
+#	else:
+#		velocity.x = lerp(velocity.x, 0.0, LERP_VAL)
+#		velocity.z = lerp(velocity.z, 0.0, LERP_VAL)
 
 	anim_tree.set("parameters/BlendSpace1D/blend_position", velocity.length() / SPEED)
 
