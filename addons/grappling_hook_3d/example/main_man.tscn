@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b7apcx1b35hgt"]
 
-[ext_resource type="PackedScene" uid="uid://cfiij5wn8gv8k" path="res://scenes/my_man.tscn" id="1_5j6om"]
+[ext_resource type="PackedScene" uid="uid://cfiij5wn8gv8k" path="res://scenes/humanoid.tscn" id="1_85beo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fs4vb"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -34,4 +34,4 @@ mesh = SubResource("PlaneMesh_cabdl")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_nocpd")
 
-[node name="My-man" parent="." instance=ExtResource("1_5j6om")]
+[node name="humanoid" parent="." instance=ExtResource("1_85beo")]
