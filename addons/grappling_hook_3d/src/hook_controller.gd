@@ -63,7 +63,7 @@ func _handle_hook(delta: float) -> void:
 	# Hook pull math
 	var pull_vector = (hook_target_position - player_body.global_position).normalized()
 	
-	player_body.velocity += pull_vector * pull_speed * delta * 60
+	player_body.velocity += pull_vector * pull_speed * delta * 45
 	
 	# Hook model
 	var source_position: Vector3
