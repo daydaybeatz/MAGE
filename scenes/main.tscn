@@ -232,7 +232,6 @@ directional_shadow_pancake_size = 18.5
 environment = SubResource("Environment_c54g4")
 
 [node name="terrain" parent="." instance=ExtResource("4_rt1hw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.83624, 0)
 
 [node name="level_1" type="Node3D" parent="terrain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.0308, 4.83624, 7.59227)
