@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cxwyw7wm3k1am"
+path="res://.godot/imported/fence_thick_gate.obj-e50ce094c734ebd9d2c86188e99fd850.mesh"
+
+[deps]
+
+files=["res://.godot/imported/fence_thick_gate.obj-e50ce094c734ebd9d2c86188e99fd850.mesh"]
+
+source_file="res://objects/fence_thick_gate.obj"
+dest_files=["res://.godot/imported/fence_thick_gate.obj-e50ce094c734ebd9d2c86188e99fd850.mesh", "res://.godot/imported/fence_thick_gate.obj-e50ce094c734ebd9d2c86188e99fd850.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

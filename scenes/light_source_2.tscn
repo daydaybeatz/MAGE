@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://d3ce5ta72hmfk"]
+
+[ext_resource type="Texture2D" uid="uid://ct8nxi7l3q8ku" path="res://textures/texture_cobble.jpg" id="1_hxv7s"]
+[ext_resource type="ArrayMesh" uid="uid://fehyinsvcod4" path="res://objects/Chandoleer.obj" id="1_tn63j"]
+[ext_resource type="PackedScene" uid="uid://coe076jgmp17" path="res://scenes/light_source.tscn" id="2_devmi"]
+[ext_resource type="Texture2D" uid="uid://jw11n46t532v" path="res://textures/texture_plank.png" id="4_p6yvt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qi44i"]
+albedo_texture = ExtResource("1_hxv7s")
+metallic = 0.45
+metallic_specular = 1.0
+roughness = 0.62
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_stawx"]
+albedo_texture = ExtResource("4_p6yvt")
+
+[node name="light_source_2" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.17, 0, 0, 0, 0.17, 0, 0, 0, 0.17, 0, 1.64473, 0)
+material_override = SubResource("StandardMaterial3D_qi44i")
+mesh = ExtResource("1_tn63j")
+
+[node name="light_source" parent="MeshInstance3D" instance=ExtResource("2_devmi")]
+transform = Transform3D(3.232, 0, 0, 0, -3.232, -4.88018e-07, 0, 4.88018e-07, -3.232, -2.3123, -1.07678, 0.979012)
+
+[node name="light_source2" parent="MeshInstance3D" instance=ExtResource("2_devmi")]
+transform = Transform3D(3.232, 0, 0, 0, -3.232, -4.88018e-07, 0, 4.88018e-07, -3.232, -0.702861, -1.07678, 2.3748)
+
+[node name="light_source3" parent="MeshInstance3D" instance=ExtResource("2_devmi")]
+transform = Transform3D(3.232, 0, 0, 0, -3.232, -4.88018e-07, 0, 4.88018e-07, -3.232, 1.35955, -1.07678, 1.88398)
+
+[node name="light_source4" parent="MeshInstance3D" instance=ExtResource("2_devmi")]
+transform = Transform3D(3.232, 0, 0, 0, -3.232, -4.88018e-07, 0, 4.88018e-07, -3.232, 1.35955, -1.07678, -1.92946)
+
+[node name="light_source5" parent="MeshInstance3D" instance=ExtResource("2_devmi")]
+transform = Transform3D(3.232, 0, 0, 0, -3.232, -4.88018e-07, 0, 4.88018e-07, -3.232, -0.702599, -1.07678, -2.31892)
+
+[node name="light_source6" parent="MeshInstance3D" instance=ExtResource("2_devmi")]
+transform = Transform3D(3.232, 0, 0, 0, -3.232, -4.88018e-07, 0, 4.88018e-07, -3.232, -2.29595, -1.07678, -1.03935)
+
+[node name="light_source7" parent="MeshInstance3D" instance=ExtResource("2_devmi")]
+transform = Transform3D(3.232, 0, 0, 0, -3.232, -4.88018e-07, 0, 4.88018e-07, -3.232, 2.27042, -1.07678, -0.0118271)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.34962, 0)
+material_override = SubResource("StandardMaterial3D_stawx")
+size = Vector3(1, 0.43, 13.105)
